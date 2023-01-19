@@ -34,12 +34,11 @@ while( input != 'q' ) {
 	} else if( input == '3' ) {
 		let username = question('> Please enter username: ')
 		let password = question('> Please enter password: ')
-		let hashedPassword = bcrypt.compareSync(password, user.password)
 		let match = users.find(user => user.username == username)
 		if( !match ) {
 			console.log('> Wrong username\n')
 		} else {
-			let correctPassword = match.password == hashedPassword
+			let correctPassword = bcrypt.compareSync(password, match.password)
 			if( correctPassword ) {
 				console.log('> Welcome user!')
 			} else {
